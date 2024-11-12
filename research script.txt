@@ -1,0 +1,60 @@
+#!/bin/bash
+#==================================================
+INTERFACE="uap0"  # Change to your network interface
+#===================================================
+
+#DEFINING_UNIVERSAL_CONSTANTS
+#========================================
+OUTPUT_DIR="/home/pi/Research_Project/OutPutsOfPacketCapture"  # Change to your preferred output directory
+ALL_LOG_DIR="/home/pi/Research_Project/ALL_LOG_DIR"
+FILE_COUNTER=1
+#=========================================
+
+
+while true; do
+  
+  if [ $FILE_COUNTER -lt 121 ];then
+    OUTPUT_FILE="$OUTPUT_DIR/capture_srno_${FILE_COUNTER}.csv"
+    
+
+    # Capture packets for 30 seconds and saving them to a CSV file
+    #============================================================
+    sudo tshark -i $INTERFACE -a duration:7 -T fields -E separator=, \
+    -e frame.number -e frame.time -e ip.src -e ip.dst -e frame.len -e frame.protocols \
+    > $OUTPUT_FILE
+    #======================================================================
+    
+    sleep 2 # Wait for 2 seconds before capturing again (this can be adjusted)
+    echo "File count is ${FILE_COUNTER}"
+    #====================================================================
+
+    #MAKING A CODE TO COMBINE 2csv files.
+    echo "combining 2 csv files"
+    
+    cp "${OUTPUT_FILE}" "${ALL_LOG_DIR}"
+    echo "File copied to ALL_LOG_DIR"
+    
+    cd "$ALL_LOG_DIR" || exit
+    
+    cat "${OUTPUT_FILE}" >> "default.csv"
+    echo "files combined at ALL_LOG_DIR"
+     
+    rm -rf capture_srno_${FILE_COUNTER}.csv
+    echo "duplicate deleted"
+    
+    
+    FILE_COUNTER=$((FILE_COUNTER+1))
+   
+
+  elif [ $FILE_COUNTER -eq 121 ]; then
+    echo "executing elif statement" 
+    FILE_COUNTER=1
+    rm $OUTPUT_DIR/* 
+    
+
+  fi 
+
+done
+
+
+
