@@ -1,0 +1,18 @@
+------------------------------------------------------------------------------------------------------------------------
+Hello everyone, this script is capable of making a CSV file of data that was captured on a network interface.
+This data is captured using Tshark, which is a CLI, terminal or command prompt based variant of Wireshark.
+Tshark's network traffic capture filters help us capture the data that we require.
+------------------------------------------------------------------------------------------------------------------------
+This script requires 3 parameters, these parameters are 
+OUTPUT_DIR
+ALL_LOG_DIR
+INTERFACE
+------------------------------------------------------------------------------------------------------------------------
+
+INTERFACE is the interface on which you want to capture the traffic.
+This can be found by typing "ipconfig" in window's command prompt and by typing "ifconfig" in Unix based systems..
+
+OUTPUT_DIR is the directory where everything will be stored temporarily before clubbing it with the previous file and storing it at
+ALL_LOG_DIR.
+
+ALL_LOG_DIR is the directory where after all the files are clubbed, get stored here.
