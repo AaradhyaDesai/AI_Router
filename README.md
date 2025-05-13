@@ -1,3 +1,15 @@
+The following files are used to convert a PCAP file into a CSV file. 
+1)converting_to_csv.py
+2)findingSYNRANGE.py
+3)making_label.py
+
+These files follow the following steps
+Step 1) First you will input your PCAP file into "converting_to_csv.py". This will give you a CSV file of the PCAP file you entered.
+Step 2) Then, you will input the output file from the privious python script to "findingSYNRANGE.py". This will result ins a text file that has all the ranges in which SYN FLOOD attack is detected.
+Step 3) Now, you will enter the result from previous two results i.e the result from "converting_to_csv.py" & "findingSYNRANGE.py" into "making_label.py". The format of input is given in the file. The operation perfomed in this steps leads to a labeled dataset.
+
+
+#### The Below scripts are for the older version where in real time the traffic is getting monitored and giving an output #####
 ------------------------------------------------------------------------------------------------------------------------
 Hello everyone, this script is capable of making a CSV file of data that was captured on a network interface.
 This data is captured using Tshark, which is a CLI, terminal or command prompt based variant of Wireshark.
